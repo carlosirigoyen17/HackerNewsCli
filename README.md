@@ -18,6 +18,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
   - Project get all Hits from an API Rest and show all content in the view.
   - A Post can deleted and it not reappear.
+  - Project EndPoint to API `configUrl = 'http://localhost:3000/hits'`.
 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
