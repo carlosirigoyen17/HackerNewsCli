@@ -1,20 +1,43 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="spinnerDiv" *ngIf="spinner">
+    <mat-spinner class="spinner"></mat-spinner>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span class="title"> {{title}} </span>
+  </mat-toolbar-row>
+  <mat-toolbar-row>
+    <span class="subTitle"> {{message}} </span> 
+  </mat-toolbar-row> 
+</mat-toolbar> 
+<mat-grid-list cols="6" rowHeight="100px">
+  <div *ngFor="let hit of hits"
+      class="contentItemList" 
+      (mouseenter)="hoverItem = hit.objectID" 
+      (mouseleave)="hoverItem = 0" >
+    <mat-grid-tile 
+      [colspan]="4" 
+      [rowspan]="1" class="leftContent" 
+      [ngClass]="{'contentItemListHover': hoverItem == hit.objectID}" 
+      [style.border-bottom]="'1px double #ccc'"
+      (click)="openPage(hit.story_url, hit.url)" >
+      <span> {{ hit.story_title || hit.title }} <span class="authorText"> - {{ hit.author }} - </span>  </span>
+    </mat-grid-tile>
+    <mat-grid-tile 
+      [colspan]="1" 
+      [rowspan]="1" class="dateContent" 
+      [ngClass]="{'contentItemListHover': hoverItem == hit.objectID}"
+      [style.border-bottom]="'1px double #ccc'" 
+      (click)="openPage(hit.story_url, hit.url)" >
+      <span> {{formatTime(hit.created_at_i)}} </span>
+    </mat-grid-tile>
+    <mat-grid-tile 
+      [colspan]="1" 
+      [rowspan]="1" 
+      [ngClass]="{'contentItemListHover': hoverItem == hit.objectID}"
+      [style.border-bottom]="'1px double #ccc'" >
+      <button mat-mini-fab color="warn" (click)="putHit(hit.objectID)" *ngIf="hoverItem == hit.objectID">
+        <i class="fas fa-trash-alt"></i>
+      </button>        
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>

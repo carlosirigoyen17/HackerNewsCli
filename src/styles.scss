@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.dateContent.mat-grid-tile {
+    figure.mat-figure {
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+}
+
+.leftContent.mat-grid-tile {
+    figure.mat-figure {
+        justify-content: flex-start;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+}
+
